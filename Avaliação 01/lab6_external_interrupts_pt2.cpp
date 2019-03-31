@@ -1,9 +1,6 @@
 #include <avr/io.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
-#include <time.h>
 
 #define FOSC 16000000
 #define BAUD 9600

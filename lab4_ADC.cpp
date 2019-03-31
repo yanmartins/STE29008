@@ -5,11 +5,11 @@
 #include <avr/delay.h>
 
 #define FOSC 16000000			// Define velocidade do clock
-#define BAUD 9600				// Define baudrate
+#define BAUD 9600			// Define baudrate
 #define MYUBRR (FOSC/16/BAUD-1) // Define a frequência de oscilação
 
 void USART_Init( unsigned int ubrr){
-	UBRR0 = ubrr;						// Define a frequência de oscilação
+	UBRR0 = ubrr;				// Define a frequência de oscilação
 	UCSR0B = (1<<RXEN0)|(1<<TXEN0); 	// Habilita RX e TX
 	UCSR0C = (1<<USBS0)|(3<<UCSZ00); 	// Define formato do frame: 8 data, 2 stop bit
 }
@@ -29,8 +29,8 @@ uint16_t read_adc(uint8_t channel){
 	ADMUX |= channel & 0x07;   	// Define um novo canal a ser lido by setting bits MUX0-2
 	ADCSRB = channel & (1<<3); 	// Define MUX5 como zero
 	ADCSRA |= (1<<ADSC);      	// Inicia uma nova conversão
-	while(ADCSRA & (1<<ADSC));  // Aguarda até que a conversão seja finalizada
-	return ADCW; 				// Retorna o valor ADC do canal escolhido
+	while(ADCSRA & (1<<ADSC));  	// Aguarda até que a conversão seja finalizada
+	return ADCW; 			// Retorna o valor ADC do canal escolhido
 }
 
 
@@ -67,13 +67,13 @@ double to_analog(double valor){
 
 int main(){
 	USART_Init(MYUBRR);	// Inicia interface de comunicação
-	adc_init();			// Inicia interface de leitura ADC
+	adc_init();		// Inicia interface de leitura ADC
 	double val = 0;
 	double val_analogico = 0;
 
 	while (true){
 
-			val = RMS(100);					// Converte valor lido para RMS
+			val = RMS(100);			// Converte valor lido para RMS
 			val_analogico = to_analog(val); // Converte valor RMS para analógico
 
 			char buffer_dig [5];
@@ -82,26 +82,26 @@ int main(){
 //			itoa(val,buffer_dig,10);
 //			itoa(val_analogico,buffer_analog,10);
 
-			dtostrf(val,5,3,buffer_dig);				// Converte o valor double para um vetor char
+			dtostrf(val,5,3,buffer_dig);			// Converte o valor double para um vetor char
 			dtostrf(val_analogico,5,3,buffer_analog);
 
 			char palavra_dig[10] = "Digital: ";
-			for (int i = 0; i < 9; i ++){				// Laço para transmissão da palavra
+			for (int i = 0; i < 9; i ++){			// Laço para transmissão da palavra
 				USART_Transmit(palavra_dig[i]);
 			}
 
-			for (int i = 0; i < 5; i ++){				// Laço para transmissão dos valores digitais
+			for (int i = 0; i < 5; i ++){			// Laço para transmissão dos valores digitais
 				USART_Transmit(buffer_dig[i]);
 			}
 			USART_Transmit('\t');	// Utilizado para formatação da saída
 
 			char palavra_analog[12] = "Analogico: ";
-			for (int i = 0; i < 11; i ++){				// Laço para transmissão da palavra
+			for (int i = 0; i < 11; i ++){			// Laço para transmissão da palavra
 				USART_Transmit(palavra_analog[i]);
 			}
 
 			for (int i = 0; i < 5; i ++){
-				USART_Transmit(buffer_analog[i]);		// Laço para transmissão dos valores analógicos
+				USART_Transmit(buffer_analog[i]);	// Laço para transmissão dos valores analógicos
 			}
 			USART_Transmit('\n');	// Utilizado para formatação da saída
 

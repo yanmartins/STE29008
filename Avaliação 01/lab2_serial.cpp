@@ -1,8 +1,8 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define FOSC 16000000			// Define velocidade do clock
-#define BAUD 9600			// Define baudrate
+#define FOSC 16000000		// Define velocidade do clock
+#define BAUD 9600		// Define baudrate
 #define MYUBRR (FOSC/16/BAUD-1) // Define a frequência de oscilação
 
 void USART_Init( unsigned int ubrr){

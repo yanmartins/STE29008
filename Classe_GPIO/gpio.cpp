@@ -41,7 +41,6 @@ GPIO::GPIO(uint8_t id, PortDirection_t dir){
 		 else {
 			 DDRE |= (1<<PE3);
 		 }
-
 	 	break;
 
 	 case 6:
@@ -60,14 +59,14 @@ GPIO::GPIO(uint8_t id, PortDirection_t dir){
 	 }
 }
 
-bool read(){
+bool GPIO::read(){
 
 }
 
-void write(bool val){
+void GPIO::write(bool val){
 
 }
 
-void toggle(){
+void GPIO::toggle(){
 
 }

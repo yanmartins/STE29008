@@ -25,6 +25,10 @@ public:
 	void toggle();
 
 private:
+	volatile uint8_t *_pin;
+	volatile uint8_t *_ddr;
+	volatile uint8_t *_port;
+	
 	uint8_t _bit; // valor no datasheet
 	uint8_t _id; // valor no arduino
 };

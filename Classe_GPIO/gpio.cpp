@@ -1,10 +1,9 @@
 /*
  * gpio.cpp
  *
- *  Created on: 03/04/2019
- *      Author: aluno
+ *  Created on: 4 de abr de 2019
+ *      Author: yan
  */
-
 
 #include "gpio.h"
 
@@ -17,29 +16,41 @@ GPIO::GPIO(uint8_t id, PortDirection_t dir){
 	 case 2:
 	 case 3:
 		 _bit = id + 2;
+		 _port = PORTE;
+		 _ddr = DDRE;
+		 _pin = PINE;
+
 		 if(dir == INPUT){
-			 DDRE &= ~(1<<_bit);
+			 _ddr &= ~(1<<_bit);
 		 }
 		 else {
-			 DDRE |= (1<<_bit);
+			 _ddr |= (1<<_bit);
 		 }
 		 break;
 
 	 case 4:
+		 _bit = PG5;
+		 _port = PORTG;
+		 _ddr = DDRG;
+		 _pin = PING;
 		 if(dir == INPUT){
-			 DDRG &= ~(1<<PG5);
+			 _ddr &= ~(1<<_bit);
 		 }
 		 else {
-			 DDRG |= (1<<PG5);
+			 _ddr |= (1<<_bit);
 		 }
 	 	break;
 
 	 case 5:
+		 _bit = PE3;
+		 _port = PORTE;
+		 _ddr = DDRE;
+		 _pin = PINE;
 		 if(dir == INPUT){
-			 DDRE &= ~(1<<PE3);
+			 _ddr &= ~(1<<_bit);
 		 }
 		 else {
-			 DDRE |= (1<<PE3);
+			 _ddr |= (1<<_bit);
 		 }
 	 	break;
 
@@ -48,25 +59,33 @@ GPIO::GPIO(uint8_t id, PortDirection_t dir){
 	 case 8:
 	 case 9:
 		 _bit = id - 3;
-
+		 _port = PORTH;
+		 _ddr = DDRH;
+		 _pin = PINH;
 		 if(dir == INPUT){
-			 DDRH &= ~(1<< _bit);
+			 _ddr &= ~(1<< _bit);
 		 }
 		 else {
-			 DDRH |= (1<< _bit);
+			 _ddr |= (1<< _bit);
 		 }
 	 	break;
 	 }
 }
 
 bool GPIO::read(){
-
+	return _pin & (1<<_bit);
 }
 
 void GPIO::write(bool val){
-
+	if(val){
+		_port |= (1 << _pin);
+	}
+	else{
+		_port &= ~(1 << _pin);
+	}
 }
 
 void GPIO::toggle(){
 
 }
+

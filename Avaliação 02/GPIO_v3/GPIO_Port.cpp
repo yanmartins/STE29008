@@ -40,7 +40,13 @@ enum Ports_index {
 	PB_i = 0,
 	PE_i = 1,
 	PG_i = 2,
-	PH_i = 3
+	PH_i = 3,
+	PJ_i = 4,
+	PD_i = 5,
+	PA_i = 6,
+	PC_i = 7,
+	PF_i = 8,
+	PK_i = 9
 };
 
 const uint8_t id_to_port[14] PROGMEM = {

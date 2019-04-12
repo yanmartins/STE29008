@@ -2,4 +2,4 @@
 
 *Sistemas Distribuídos*
 
-Diretório utilizado para armazenar os laboratórios executados na disciplina de Sistemas Embarcados.
+Diretório utilizado para armazenar as avaliações e laboratórios elaboradorados durante a disciplina de Sistemas Embarcados.

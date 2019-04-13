@@ -5,9 +5,6 @@
  *      Author: aluno
  */
 
-
-
-
 #include <avr/io.h>
 #include "usart.h"
 
@@ -21,12 +18,18 @@ _id(id)
 		UCSR0C = db|parity|sb;
 		break;
 	case 1:
+		UBRR1 = (16000000/16/baud-1);
+		UCSR1B = (1<<RXEN1)|(1<<TXEN1);
 		UCSR1C = db|parity|sb;
 		break;
 	case 2:
+		UBRR2 = (16000000/16/baud-1);
+		UCSR2B = (1<<RXEN2)|(1<<TXEN2);
 		UCSR2C = db|parity|sb;
 		break;
 	case 3:
+		UBRR3 = (16000000/16/baud-1);
+		UCSR3B = (1<<RXEN3)|(1<<TXEN3);
 		UCSR3C = db|parity|sb;
 		break;
 	}
